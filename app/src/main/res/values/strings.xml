@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">API NASA</string>
+
+    <!-- Apollo Strings -->
+    <string name="favourite">Favorito</string>
+    <string name="text_default">Text</string>
+    <string name="nasa">NASA</string>
+    <string name="search">Buscar...</string>
+    <string name="title_activity_apollo_detail">ApolloDetailActivity</string>
+</resources>

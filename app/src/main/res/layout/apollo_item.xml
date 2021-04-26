@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/backgroundItem"
+    android:layout_marginTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:srcCompat="@drawable/ic_nasa_logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nasa"
+            android:layout_gravity="center"
+            android:fontFamily="@font/muli_bold"
+            android:paddingRight="10dp"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_baseline_check_circle_24"
+            app:tint="@color/blue"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_default"
+        android:fontFamily="@font/muli"
+        android:padding="10dp"/>
+
+    <ImageView
+        android:id="@+id/iv_apollo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="280dp"
+        android:adjustViewBounds="true"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_favourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_favourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_star_24"
+            app:tint="@color/yellow"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/iv_favourite_without"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_star_outline_24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli"
+            android:text="@string/favourite"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
