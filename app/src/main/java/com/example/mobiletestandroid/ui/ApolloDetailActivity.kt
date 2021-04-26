@@ -8,17 +8,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobiletestandroid.R
-import com.example.mobiletestandroid.Util
-import com.example.mobiletestandroid.data.ApolloMapper
-import com.example.mobiletestandroid.data.ApolloRepository
-import com.example.mobiletestandroid.data.dataSource.Cloud.ApolloDataCloud
-import com.example.mobiletestandroid.data.dataSource.Cloud.EndPoints
-import com.example.mobiletestandroid.data.dataSource.Local.ApolloDataLocal
 import com.example.mobiletestandroid.domain.ApolloEntity
 import com.example.mobiletestandroid.ui.di.DaggerApolloDetailComponent
-import com.example.mobiletestandroid.usecases.GetApolloData
-import com.example.mobiletestandroid.usecases.UpdateApolloData
-import com.loopj.android.http.SyncHttpClient
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 

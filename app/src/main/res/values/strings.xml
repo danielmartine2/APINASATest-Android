@@ -7,4 +7,7 @@
     <string name="nasa">NASA</string>
     <string name="search">Buscar...</string>
     <string name="title_activity_apollo_detail">ApolloDetailActivity</string>
+    <string name="withoutInternet">No tienes Internet. Comprueba la onexión.</string>
+    <string name="retry">Reintentar</string>
+
 </resources>

@@ -4,21 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletestandroid.R
-import com.example.mobiletestandroid.Util
-import com.example.mobiletestandroid.data.ApolloMapper
-import com.example.mobiletestandroid.data.ApolloRepository
-import com.example.mobiletestandroid.data.dataSource.Cloud.ApolloDataCloud
-import com.example.mobiletestandroid.data.dataSource.Local.ApolloDataLocal
-import com.example.mobiletestandroid.data.dataSource.Cloud.EndPoints
 import com.example.mobiletestandroid.data.dataSource.Local.ApolloDB
 import com.example.mobiletestandroid.domain.ApolloEntity
 import com.example.mobiletestandroid.ui.di.DaggerApolloComponent
-import com.example.mobiletestandroid.usecases.GetApolloData
-import com.example.mobiletestandroid.usecases.UpdateApolloData
-import com.loopj.android.http.SyncHttpClient
 import javax.inject.Inject
 
 private const val EXTRA_DETAIL = "Detail"
@@ -31,6 +25,11 @@ class MainActivity() : AppCompatActivity(), ApolloPresenter.View{
 
     private var apolloAdapter = ApolloAdapter(mutableListOf(), this)
 
+    //layouts
+    private var fail: LinearLayout? = null
+    private var loading: LinearLayout? = null
+    private var recycler: RecyclerView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,8 +37,18 @@ class MainActivity() : AppCompatActivity(), ApolloPresenter.View{
         ApolloDB.getDatabase(application)
 
         apolloPresenter.setView(this)
-        val recycler = findViewById<RecyclerView>(R.id.recycler)
-        recycler.adapter = apolloAdapter
+        recycler = findViewById<RecyclerView>(R.id.recycler)
+        recycler?.adapter = apolloAdapter
+
+
+        fail = findViewById(R.id.fail)
+        loading = findViewById(R.id.progress)
+        val btRetry: Button = findViewById(R.id.retry)
+
+        btRetry.setOnClickListener {
+            loading()
+            apolloPresenter.onResume()
+        }
 
     }
 
@@ -72,14 +81,21 @@ class MainActivity() : AppCompatActivity(), ApolloPresenter.View{
 
     override fun renderApolloData(apolloData: MutableList<ApolloEntity>) {
         apolloAdapter.updateItems(apolloData)
+        recycler?.visibility = View.VISIBLE
+        fail?.visibility = View.GONE
+        loading?.visibility = View.GONE
     }
 
     override fun failGetApolloData() {
-
+        recycler?.visibility = View.GONE
+        fail?.visibility = View.VISIBLE
+        loading?.visibility = View.GONE
     }
 
     override fun withoutInternet() {
-
+        recycler?.visibility = View.GONE
+        fail?.visibility = View.VISIBLE
+        loading?.visibility = View.GONE
     }
 
     override fun updateFavourite(apollo: ApolloEntity) {
@@ -96,10 +112,17 @@ class MainActivity() : AppCompatActivity(), ApolloPresenter.View{
         }
     }
 
+    fun loading(){
+        recycler?.visibility = View.GONE
+        fail?.visibility = View.GONE
+        loading?.visibility = View.VISIBLE
+    }
+
     override fun onResume() {
         super.onResume()
         apolloPresenter.onResume()
         checkGoToDetail = false
+        loading()
     }
 
     override fun onDestroy() {
